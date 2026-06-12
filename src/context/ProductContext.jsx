@@ -10,6 +10,7 @@ export const ProductProvider = ({ children }) => {
         brands: [],
         minPrice: "",
         maxPrice: "",
+        search: ""
     })
 
     const [tempPrice, setTempPrice] = useState({
@@ -36,7 +37,6 @@ export const ProductProvider = ({ children }) => {
             page,
             setPage,
             limit,
-
 
             loading,
             setLoading,

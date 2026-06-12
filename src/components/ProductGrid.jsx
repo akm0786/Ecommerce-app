@@ -25,14 +25,27 @@ const ProductGrid = () => {
             return false
         }
 
+        //search filter
+
+        if (filters.search) {
+            const searchTerm = filters.search.toLowerCase()
+            const titleMatch = product.title.toLowerCase().includes(searchTerm)
+            const brandMatch = product.brand.toLowerCase().includes(searchTerm)
+            const categoryMatch = product.category.toLowerCase().includes(searchTerm)
+
+            if (!titleMatch && !brandMatch && !categoryMatch) {
+                return false
+            }
+        }
+
         return true;
 
     })
 
-    if(filteredProducts.length === 0){
+    if (filteredProducts.length === 0) {
         return <p>No products found</p>
     }
-    
+
     return (
         <div className="product-grid">
             {
