@@ -23,6 +23,7 @@ export const ProductProvider = ({ children }) => {
 
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
+    const [showSidebar, setShowSidebar] = useState(true)
 
     return (
         <ProductContext.Provider value={{
@@ -41,7 +42,10 @@ export const ProductProvider = ({ children }) => {
             loading,
             setLoading,
             error,
-            setError
+            setError,
+            
+            showSidebar,
+            setShowSidebar
         }}>
             {children}
         </ProductContext.Provider>

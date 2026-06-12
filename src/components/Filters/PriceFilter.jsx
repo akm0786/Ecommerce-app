@@ -1,34 +1,48 @@
 import { useProductContext } from "../../context/ProductContext"
 
 const PriceFilter = () => {
-    const { filters, setFilters, setPage } = useProductContext()
+    const { tempPrice, setTempPrice, setFilters, setPage } = useProductContext()
 
     const handleChange = (key, value) => {
-        setFilters(prev => ({
+        setTempPrice(prev => ({
             ...prev,
             [key]: value
         }))
+    }
 
-        setPage(1) // ✅ required: reset pagination
+    const handleApply = () => {
+        setFilters(prev => ({
+            ...prev,
+            minPrice: tempPrice.min,
+            maxPrice: tempPrice.max
+        }))
+        setPage(1)
     }
 
     return (
-        <div className="filter-section">
-            <h4>Price Range</h4>
+        <div className="filter-section price-filter-section">
+            <h4 className="filter-title">Price Range</h4>
 
-            <input
-                type="number"
-                placeholder="Min"
-                value={filters.minPrice}
-                onChange={(e) => handleChange("minPrice", e.target.value)}
-            />
+            <div className="price-inputs-row">
+                <input
+                    type="number"
+                    placeholder="Min"
+                    value={tempPrice.min || ""}
+                    onChange={(e) => handleChange("min", e.target.value)}
+                    className="price-input"
+                />
+                <input
+                    type="number"
+                    placeholder="Max"
+                    value={tempPrice.max || ""}
+                    onChange={(e) => handleChange("max", e.target.value)}
+                    className="price-input"
+                />
+            </div>
 
-            <input
-                type="number"
-                placeholder="Max"
-                value={filters.maxPrice}
-                onChange={(e) => handleChange("maxPrice", e.target.value)}
-            />
+            <button className="apply-btn" onClick={handleApply}>
+                Apply
+            </button>
         </div>
     )
 }
