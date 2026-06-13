@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { getProducts, getProductsByCategory } from '../api/productApi'
+import { getProducts, getProductsByCategory, searchProducts } from '../api/productApi'
 import { useProductContext } from '../context/ProductContext'
 import Filters from '../components/Filters/Filters'
 import ProductGrid from '../components/ProductGrid'
@@ -27,7 +27,9 @@ const ProductListing = () => {
                 let data
 
                 const skip = (page - 1) * limit
-                if (filters.category) {
+                if (filters.search) {
+                    data = await searchProducts(filters.search, limit, skip)
+                } else if (filters.category) {
                     data = await getProductsByCategory(filters.category, limit, skip)
                 } else {
                     data = await getProducts(limit, skip)
@@ -44,7 +46,8 @@ const ProductListing = () => {
         }
 
         fetchData()
-    }, [filters.category, page])
+    }, [filters.category, filters.search, page])
+
 
     return (
         <div className="container">

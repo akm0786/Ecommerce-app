@@ -29,14 +29,15 @@ const ProductGrid = () => {
 
         if (filters.search) {
             const searchTerm = filters.search.toLowerCase()
-            const titleMatch = product.title.toLowerCase().includes(searchTerm)
-            const brandMatch = product.brand.toLowerCase().includes(searchTerm)
-            const categoryMatch = product.category.toLowerCase().includes(searchTerm)
+            const titleMatch = product.title ? product.title.toLowerCase().includes(searchTerm) : false
+            const brandMatch = product.brand ? product.brand.toLowerCase().includes(searchTerm) : false
+            const categoryMatch = product.category ? product.category.toLowerCase().includes(searchTerm) : false
 
             if (!titleMatch && !brandMatch && !categoryMatch) {
                 return false
             }
         }
+
 
         return true;
 

@@ -1,14 +1,16 @@
 import { useProductContext } from "../context/ProductContext"
 
 const Header = () => {
-    const { filters, setFilters, setShowSidebar } = useProductContext()
+    const { filters, setFilters, setShowSidebar, setPage } = useProductContext()
 
     const handleSearch = (e) => {
+        setPage(1)
         setFilters((prev) => ({
             ...prev,
             search: e.target.value
         }))
     }
+
 
     return (
         <header className="header">
