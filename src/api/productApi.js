@@ -11,7 +11,7 @@ export const getCategories = async () => {
     return res.json()
 }
 
-export const getProductsByCategory = async (category) => {
-    const res = await fetch(`https://dummyjson.com/products/category/${category}`)
+export const getProductsByCategory = async (category, limit = 12, skip = 0) => {
+    const res = await fetch(`https://dummyjson.com/products/category/${category}?limit=${limit}&skip=${skip}`)
     return res.json()
 }

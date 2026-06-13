@@ -26,12 +26,13 @@ const ProductListing = () => {
 
                 let data
 
+                const skip = (page - 1) * limit
                 if (filters.category) {
-                    data = await getProductsByCategory(filters.category)
+                    data = await getProductsByCategory(filters.category, limit, skip)
                 } else {
-                    const skip = (page - 1) * limit
                     data = await getProducts(limit, skip)
                 }
+
 
                 setProducts(data.products)
 
